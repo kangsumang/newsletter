@@ -3,96 +3,150 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Newsletter Template</title>
+<title>Fuse/Sprynt/Ryse Site Reliability Team Newsletter</title>
 
 <style>
+/* General Styles */
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #0f0f1a;
+    color: #ffffff;
     margin: 0;
-    background: #f4f6f8;
+    padding: 0;
 }
 
 .container {
     max-width: 900px;
     margin: auto;
-    background: white;
-    padding: 20px;
+    background-color: #1a1a2e;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.7);
 }
 
+/* Header */
 .header {
-    background: #0b5ed7;
-    color: white;
-    padding: 20px;
+    text-align: center;
+    border-bottom: 2px solid #00ffea;
+    padding-bottom: 20px;
+    margin-bottom: 30px;
 }
 
 .header h1 {
+    font-size: 36px;
     margin: 0;
+    color: #00ffea;
 }
 
-.subtitle {
-    opacity: 0.9;
+.header p {
+    font-size: 16px;
+    color: #8ae3e3;
+    margin-top: 5px;
 }
 
-.section {
-    margin-top: 30px;
+/* Team Section */
+.team-section {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
 }
 
-.section h2 {
-    border-bottom: 2px solid #0b5ed7;
-    padding-bottom: 5px;
+.team-member {
+    background-color: #162447;
+    border: 1px solid #00ffea;
+    border-radius: 10px;
+    width: 250px;
+    margin: 15px;
+    text-align: center;
+    padding: 15px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
+.team-member:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0 15px #00ffea;
+}
+
+.team-member img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #00ffea;
+    margin-bottom: 10px;
+}
+
+.team-member h3 {
+    margin: 10px 0 5px 0;
+    font-size: 20px;
+    color: #00ffea;
+}
+
+.team-member p {
+    margin: 0;
+    font-size: 14px;
+    color: #a0e7e5;
+}
+
+/* Footer */
 .footer {
     margin-top: 40px;
-    padding: 10px;
-    font-size: 12px;
-    color: gray;
+    padding-top: 20px;
+    border-top: 1px solid #00ffea;
     text-align: center;
+    font-size: 12px;
+    color: #8ae3e3;
 }
 </style>
-
 </head>
 <body>
 
 <div class="container">
 
+<!-- Header -->
 <div class="header">
-    <h1>Newsletter Title</h1>
-    <div class="subtitle">Subtitle here</div>
-    <div>Date | Author</div>
+    <h1>Site Reliability Engineers – Fuse / Sprynt / Ryse & Block G</h1>
+    <p>Meet the heroes keeping our platforms stable and scalable</p>
 </div>
 
-<div class="section">
-    <h2>Section 1</h2>
-    <p>
-        Write your content here...
-    </p>
+<!-- Team Section -->
+<div class="team-section">
+
+    <div class="team-member">
+        <img src="placeholder.jpg" alt="Leih Palaroan">
+        <h3>Leih Palaroan</h3>
+        <p>Head of Fuse, Ryse, Sprynt / Block G</p>
+    </div>
+
+    <div class="team-member">
+        <img src="placeholder.jpg" alt="Cris Zapanta">
+        <h3>Cris Zapanta</h3>
+        <p>Site Reliability Engineer – Fuse, Ryse, Sprynt / Block G</p>
+    </div>
+
+    <div class="team-member">
+        <img src="placeholder.jpg" alt="Ryan Villasis">
+        <h3>Ryan Villasis</h3>
+        <p>Site Reliability Engineer – Fuse, Ryse, Sprynt / Block G</p>
+    </div>
+
+    <div class="team-member">
+        <img src="placeholder.jpg" alt="James Olorocisimo">
+        <h3>James Olorocisimo</h3>
+        <p>Site Reliability Engineer – Fuse, Ryse, Sprynt / Block G</p>
+    </div>
+
+    <div class="team-member">
+        <img src="placeholder.jpg" alt="Ericka Sumang">
+        <h3>Ericka Sumang</h3>
+        <p>Site Reliability Engineer – Fuse, Ryse, Sprynt / Block G</p>
+    </div>
+
 </div>
 
-<div class="section">
-    <h2>Section 2</h2>
-    <p>
-        Write your content here...
-    </p>
-</div>
-
-<div class="section">
-    <h2>Section 3</h2>
-    <p>
-        Write your content here...
-    </p>
-</div>
-
-<div class="section">
-    <h2>Section 4</h2>
-    <p>
-        Write your content here...
-    </p>
-</div>
-
+<!-- Footer -->
 <div class="footer">
-    Newsletter Template • Editable HTML • 2026
+    Fuse / Sprynt / Ryse & Block G | Site Reliability Engineering Team | 2026
 </div>
 
 </div>
