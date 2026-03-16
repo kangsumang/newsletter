@@ -1,160 +1,597 @@
----
-layout: default
-title: "SRE Newsletter"
----
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Fuse/Sprynt/Ryse Site Reliability Team Newsletter</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SRE Team Newsletter</title>
 
-<style>
-/* General Styles */
-body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #0f0f1a;
-    color: #ffffff;
-    margin: 0;
-    padding: 0;
-}
+    <style>
+        /* ----- Leader Hover Interaction ----- */
+        .leader-card {
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
 
-.container {
-    max-width: 900px;
-    margin: auto;
-    background-color: #1a1a2e;
-    padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0 0 20px rgba(0,0,0,0.7);
-}
+        .leader-card:hover {
+            transform: translateY(-8px) scale(1.03);
+            box-shadow: 0 20px 35px rgba(0, 255, 136, 0.15);
+        }
 
-/* Header */
-.header {
-    text-align: center;
-    border-bottom: 2px solid #00ffea;
-    padding-bottom: 20px;
-    margin-bottom: 30px;
-}
+        .leader-name {
+            transition: transform 0.3s ease, color 0.3s ease;
+        }
 
-.header h1 {
-    font-size: 36px;
-    margin: 0;
-    color: #00ffea;
-}
+        .leader-card:hover .leader-name {
+            transform: translateY(-3px);
+            color: #00ffbf;
+        }
 
-.header p {
-    font-size: 16px;
-    color: #8ae3e3;
-    margin-top: 5px;
-}
+        /* ----- Leader Photo Improved ----- */
+        .leader-photo {
+            width: 85px;
+            height: 85px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.12);
+            border: 2px solid rgba(255,255,255,0.25);
+            margin: 0 auto 15px auto;
+            background-size: cover;
+            background-position: center;
+            transition: transform 0.3s ease;
+        }
 
-/* Team Section */
-.team-section {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-}
+        .leader-card:hover .leader-photo {
+            transform: scale(1.07);
+        }
 
-.team-member {
-    background-color: #162447;
-    border: 1px solid #00ffea;
-    border-radius: 10px;
-    width: 250px;
-    margin: 15px;
-    text-align: center;
-    padding: 15px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
+        /* ----- Team Member Card Redesign ----- */
+        .team-members .member {
+            background: rgba(255, 255, 255, 0.03);
+            padding: 12px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transition: transform 0.25s ease, background 0.25s ease;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
 
-.team-member:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 0 15px #00ffea;
-}
+        .team-members .member:hover {
+            transform: translateX(6px);
+            background: rgba(255,255,255,0.08);
+        }
 
-.team-member img {
-    width: 120px;
-    height: 120px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 3px solid #00ffea;
-    margin-bottom: 10px;
-}
+        /* --- Member Photo Placeholder --- */
+        .member-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-size: cover;
+            background-position: center;
+            flex-shrink: 0;
+            border: 2px solid rgba(255,255,255,0.2);
+        }
 
-.team-member h3 {
-    margin: 10px 0 5px 0;
-    font-size: 20px;
-    color: #00ffea;
-}
+        .member-avatar.lead {
+            background: linear-gradient(135deg, #00ff88, #00a2ff);
+            color: #000;
+            font-weight: bold;
+        }
 
-.team-member p {
-    margin: 0;
-    font-size: 14px;
-    color: #a0e7e5;
-}
+        .member-avatar.regular {
+            /* background: rgba(255,255,255,0.2);
+            color: #000; */
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-size: cover;
+            background-position: center;
+            flex-shrink: 0;
+            border: 2px solid rgba(255,255,255,0.2);
+        
+        }
 
-/* Footer */
-.footer {
-    margin-top: 40px;
-    padding-top: 20px;
-    border-top: 1px solid #00ffea;
-    text-align: center;
-    font-size: 12px;
-    color: #8ae3e3;
-}
-</style>
+        /* Text Improvements */
+        .member-info .member-name {
+            font-size: 0.95rem;
+        }
+
+        .member-info .member-role {
+            font-size: 0.75rem;
+            color: #bbb;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);
+            min-height: 100vh;
+            color: #e0e0e0;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        /* Header Styles */
+        .header {
+            text-align: center;
+            padding: 60px 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background:
+                radial-gradient(circle at 20% 50%, rgba(0, 255, 136, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 50%, rgba(0, 162, 255, 0.1) 0%, transparent 50%);
+            z-index: 0;
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .logo-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #00ff88, #00a2ff);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { box-shadow: 0 0 20px rgba(0, 255, 136, 0.5); }
+            50% { box-shadow: 0 0 40px rgba(0, 255, 136, 0.8); }
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            background: linear-gradient(90deg, #00ff88, #00a2ff, #00ff88);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradient 3s ease infinite;
+        }
+
+        @keyframes gradient {
+            0% { background-position: 0% center; }
+            50% { background-position: 100% center; }
+            100% { background-position: 0% center; }
+        }
+
+        .date-badge {
+            display: inline-block;
+            background: rgba(0, 255, 136, 0.1);
+            border: 1px solid rgba(0, 255, 136, 0.3);
+            padding: 8px 20px;
+            border-radius: 50px;
+            margin-top: 20px;
+            font-size: 0.9rem;
+            color: #00ff88;
+        }
+
+        /* Stats Section */
+        .stats-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 40px 0;
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 30px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #00ff88, #00a2ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Leadership Section */
+        .section-title {
+            font-size: 1.8rem;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .leadership-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-bottom: 60px;
+        }
+
+        .leader-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 30px;
+            cursor: pointer;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        /* NEW: Photo placeholder */
+        .leader-photo {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            margin: 0 auto 15px auto;
+            background: rgba(255,255,255,0.15);
+            border: 2px solid rgba(255,255,255,0.3);
+            background-size: cover;
+            background-position: center;
+        }
+
+        /* Team Clusters */
+        .cluster-section {
+            margin-bottom: 50px;
+            opacity: 0;
+            display: none;
+            transition: opacity 0.4s ease;
+        }
+
+        .cluster-section.active {
+            display: block;
+            opacity: 1;
+        }
+
+        .tribes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+    </style>
 </head>
-<body>
 
+<body>
 <div class="container">
 
-<!-- Header -->
-<div class="header">
-    <h1>Site Reliability Engineers – Fuse / Sprynt / Ryse & Block G</h1>
-    <p>Meet the heroes keeping our platforms stable and scalable</p>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <div class="logo"><div class="logo-icon">⚡</div></div>
+            <h1>Site Reliability Engineering</h1>
+            <p>Building resilient systems, one deployment at a time</p>
+
+            <div class="date-badge">
+                <span class="terminal-text">></span> Newsletter Edition — 
+                <span id="current-date"></span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Stats Section -->
+    <section class="stats-section">
+        <div class="stat-card"><div class="stat-number" id="team-count">0</div><div>Team Members</div></div>
+        <div class="stat-card"><div class="stat-number">4</div><div>Cluster Leads</div></div>
+        <div class="stat-card"><div class="stat-number">14</div><div>Tribes Supported</div></div>
+        <div class="stat-card"><div class="stat-number">99.9%</div><div>Uptime Target</div></div>
+    </section>
+
+    <!-- Leadership Section -->
+    <section class="leadership-section">
+        <h2 class="section-title">Leadership Team</h2>
+
+        <div class="leadership-grid">
+
+            <div class="leader-card" data-cluster="cluster-1 cluster-2">
+                <div class="leader-photo" style="background-image:url('images/james.jpg');"></div>
+                <div class="leader-name">IPE</div>
+                <div class="leader-role">Head of GXI SRE</div>
+            </div>
+
+            <div class="leader-card" data-cluster="cluster-3">
+                <div class="leader-photo" style="background-image:url('images/james.jpg');"></div>
+                <div class="leader-name">TBH</div>
+                <div class="leader-role">Head of Mynt SRE</div>
+            </div>
+
+            <div class="leader-card" data-cluster="cluster-4">
+                <div class="leader-photo" style="background-image:url('images/james.jpg');"></div>
+                <div class="leader-name">LEIH</div>
+                <div class="leader-role">Head of Fuse, Sprynt, Ryse/BlockG SRE</div>
+            </div>
+
+            <div class="leader-card" data-cluster="cluster-transformation">
+                <div class="leader-photo" style="background-image:url('images/james.jpg');"></div>
+                <div class="leader-name">DOM</div>
+                <div class="leader-role">Head of SRE Transformation</div>
+            </div>
+
+        </div>
+    </section>
+
+    <section class="clusters-container">
+        <h2 class="section-title">Our Teams</h2>
+
+<!-- Cluster 1 -->
+<div class="cluster-section cluster-1">
+    <div class="cluster-header">
+        <span class="cluster-badge">Cluster 1</span>
+        <span class="cluster-head">GXI-B2B & GXI-B2I • Lead: IPE</span>
+    </div>
+    <div class="tribes-grid">
+        <div class="tribe-card fade-in">
+            <div class="tribe-name">B2B</div>
+            <div class="tribe-opco">GXI-B2B</div>
+            <div class="team-members">
+                <div class="member">
+                    <div class="member-avatar lead" 
+        style="background-image:url('images/james.jpg');">
+    </div>
+
+                    <div class="member-info">
+                        <div class="member-name lead">Angelo</div>
+                        <div class="member-role">Team Lead</div>
+                    </div>
+                </div>
+                <div class="member">
+                    <div class="member-avatar regular" style="background-image: url('images/james.jpg');"></div>
+                    <div class="member-info">
+                        <div class="member-name">Bert</div>
+                        <div class="member-role">SRE</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
-<!-- Team Section -->
-<div class="team-section">
-
-    <div class="team-member">
-        <img src="images/leih.jpg" alt="Leih Palaroan">
-        <h3>Leih Palaroan</h3>
-        <p>Head of Fuse, Ryse, Sprynt / Block G</p>
+<!-- Cluster 2 -->
+<div class="cluster-section cluster-2">
+    <div class="cluster-header">
+        <span class="cluster-badge">Cluster 2</span>
+        <span class="cluster-head">GXI-B2C • Lead: IPE</span>
     </div>
+    <div class="tribes-grid">
+        <div class="tribe-card fade-in">
+            <div class="tribe-name">B2C</div>
+            <div class="tribe-opco">GXI-B2C</div>
+            <div class="team-members">
+                <div class="member">
+                    <div class="member-avatar lead">E</div>
+                    <div class="member-info">
+                        <div class="member-name lead">Earth</div>
+                        <div class="member-role">Team Lead</div>
+                    </div>
+                </div>
+                <div class="member">
+                    <div class="member-avatar regular">M</div>
+                    <div class="member-info">
+                        <div class="member-name">Mo</div>
+                        <div class="member-role">SRE</div>
+                    </div>
+                </div>
+                <div class="member">
+                    <div class="member-avatar regular">D</div>
+                    <div class="member-info">
+                        <div class="member-name">Danye</div>
+                        <div class="member-role">SRE</div>
+                    </div>
+                </div>
+                <div class="member">
+                    <div class="member-avatar regular">J</div>
+                    <div class="member-info">
+                        <div class="member-name">Jem K</div>
+                        <div class="member-role">SRE</div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-    <div class="team-member">
-        <img src="images/cris.jpg" alt="Cris Zapanta">
-        <h3>Cris Zapanta</h3>
-        <p>Site Reliability Engineer – Fuse, Ryse, Sprynt / Block G</p>
     </div>
+</div>
 
-    <div class="team-member">
-        <img src="images/ryan.jpg" alt="Ryan Villasis">
-        <h3>Ryan Villasis</h3>
-        <p>Site Reliability Engineer – Fuse, Ryse, Sprynt / Block G</p>
+<!-- Cluster 3 -->
+<div class="cluster-section cluster-3">
+    <div class="cluster-header">
+        <span class="cluster-badge">Cluster 3</span>
+        <span class="cluster-head">Mynt • Lead: TBH</span>
     </div>
+    <div class="tribes-grid">
+        <div class="tribe-card fade-in">
+            <div class="tribe-name">Technology</div>
+            <div class="tribe-opco">Mynt</div>
+            <div class="team-members">
+                <div class="member">
+                    <div class="member-avatar lead">V</div>
+                    <div class="member-info">
+                        <div class="member-name lead">Van L</div>
+                        <div class="member-role">Team Lead</div>
+                    </div>
+                </div>
+                <div class="member">
+                    <div class="member-avatar regular">V</div>
+                    <div class="member-info">
+                        <div class="member-name">Van I</div>
+                        <div class="member-role">SRE</div>
+                    </div>
+                </div>
+                <div class="member">
+                    <div class="member-avatar regular">D</div>
+                    <div class="member-info">
+                        <div class="member-name">Donald</div>
+                        <div class="member-role">SRE</div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-    <div class="team-member">
-        <img src="images/james.jpg" alt="James Olorocisimo">
-        <h3>James Olorocisimo</h3>
-        <p>Site Reliability Engineer – Fuse, Ryse, Sprynt / Block G</p>
     </div>
+</div>
 
-    <div class="team-member">
-        <img src="images/ericka.jpg" alt="Ericka Sumang">
-        <h3>Ericka Sumang</h3>
-        <p>Site Reliability Engineer – Fuse, Ryse, Sprynt / Block G</p>
+<!-- Cluster 4 -->
+<div class="cluster-section cluster-4">
+    <div class="cluster-header">
+        <span class="cluster-badge">Cluster 4</span>
+        <span class="cluster-head">Fuse, Sprynt, Ryse/BlockG • Lead: LEIH</span>
     </div>
+    <div class="tribes-grid">
+
+        <div class="tribe-card fade-in">
+            <div class="tribe-name">Lending</div>
+            <div class="tribe-opco">Fuse</div>
+            <div class="team-members">
+                <div class="member">
+                    <div class="member-avatar lead">C</div>
+                    <div class="member-info">
+                        <div class="member-name lead">Cris</div>
+                        <div class="member-role">Team Lead</div>
+                    </div>
+                </div>
+                <div class="member">
+                    <div class="member-avatar regular">R</div>
+                    <div class="member-info">
+                        <div class="member-name">Ryan</div>
+                        <div class="member-role">SRE</div>
+                    </div>
+                </div>
+                <div class="member">
+                    <div class="member-avatar regular">J</div>
+                    <div class="member-info">
+                        <div class="member-name">James</div>
+                        <div class="member-role">SRE</div>
+                    </div>
+                </div>
+                <div class="member">
+                    <div class="member-avatar regular">E</div>
+                    <div class="member-info">
+                        <div class="member-name">Ericka</div>
+                        <div class="member-role">SRE</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!-- Transformation -->
+<div class="cluster-section cluster-transformation">
+    <div class="cluster-header">
+        <span class="cluster-badge">Transformation</span>
+        <span class="cluster-head">Automation & Tooling • Lead: DOM</span>
+    </div>
+    <div class="tribes-grid">
+        <div class="tribe-card fade-in">
+            <div class="tribe-name">Automation & Tooling</div>
+            <div class="tribe-opco">SRE Transformation</div>
+            <div class="team-members">
+                <div class="member">
+                    <div class="member-avatar lead">I</div>
+                    <div class="member-info">
+                        <div class="member-name lead">Irone</div>
+                        <div class="member-role">Team Lead</div>
+                    </div>
+                </div>
+                <div class="member">
+                    <div class="member-avatar regular">B</div>
+                    <div class="member-info">
+                        <div class="member-name">Benjamin</div>
+                        <div class="member-role">SRE</div>
+                    </div>
+                </div>
+                <div class="member">
+                    <div class="member-avatar regular">E</div>
+                    <div class="member-info">
+                        <div class="member-name">Ericka</div>
+                        <div class="member-role">SRE</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>  
+
+    </section>
 
 </div>
 
-<!-- Footer -->
-<div class="footer">
-    Fuse / Sprynt / Ryse & Block G | Site Reliability Engineering Team | 2026
-</div>
+<!-- ========================= -->
+<!-- JavaScript (interactivity) -->
+<!-- ========================= -->
+<script>
+    // Set current date
+    document.getElementById("current-date").textContent = new Date().toLocaleDateString('en-US', {
+        year: 'numeric', month: 'long', day: 'numeric'
+    });
 
-</div>
+    // Animate team count
+    const teamCountEl = document.getElementById('team-count');
+    const targetCount = 21;
+    let current = 0;
+
+    function animateCount() {
+        current++;
+        if (current <= targetCount) {
+            teamCountEl.textContent = current;
+            requestAnimationFrame(animateCount);
+        }
+    }
+    animateCount();
+
+    // NEW: Leader click / cluster toggle
+    const leaders = document.querySelectorAll(".leader-card");
+    const clusters = document.querySelectorAll(".cluster-section");
+
+    leaders.forEach(leader => {
+        leader.addEventListener("click", () => {
+
+            clusters.forEach(c => c.classList.remove("active"));
+
+            const targetClusters = leader.getAttribute("data-cluster").split(" ");
+
+            targetClusters.forEach(cls => {
+                const section = document.querySelector(`.${cls}`);
+                if (section) section.classList.add("active");
+            });
+
+            document.querySelector(".clusters-container").scrollIntoView({
+                behavior: "smooth"
+            });
+        });
+    });
+</script>
 
 </body>
 </html>
