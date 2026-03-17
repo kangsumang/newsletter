@@ -197,11 +197,25 @@
         }
 
         /* Team Clusters & Tribe Cards */
+        .clusters-container {
+            display: flex;
+            flex-wrap: nowrap; /* Keeps multiple clusters side-by-side in one row */
+            justify-content: center;
+            align-items: flex-start;
+            gap: 40px;
+            overflow-x: auto; /* Allows horizontal scrolling on smaller screens */
+            width: 100%;
+            padding-bottom: 20px;
+        }
+
         .cluster-section {
             margin-bottom: 50px;
             opacity: 0;
             display: none;
             transition: opacity 0.4s ease;
+            flex: 1 1 0; /* Allows active clusters to share the row evenly */
+            min-width: 340px; /* Prevents the cluster from getting too squeezed */
+            max-width: 700px; /* Keeps single clusters neat when alone */
         }
 
         .cluster-section.active {
@@ -235,10 +249,12 @@
         }
 
         .tribes-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            display: flex;
+            flex-wrap: nowrap; /* Forces multiple tribe cards to stay in exactly 1 row */
             gap: 20px;
             justify-content: center;
+            overflow-x: auto; /* Allows scrolling on smaller screens if needed */
+            padding-bottom: 15px;
         }
 
         .tribe-card {
@@ -247,6 +263,8 @@
             border-radius: 20px;
             padding: 25px;
             text-align: center; /* Center everything in the tribe card */
+            flex: 0 0 auto; /* Prevents cards from shrinking out of shape */
+            min-width: 320px;
         }
 
         .tribe-name {
@@ -418,9 +436,11 @@
         <div class="cluster-section cluster-1">
             <div class="cluster-header">
                 <span class="cluster-badge">Cluster 1</span>
-                <span class="cluster-head">GXI-B2B & GXI-B2I • Lead: IPE</span>
+                <span class="cluster-head">GXI-B2B • Lead: IPE</span>
             </div>
             <div class="tribes-grid">
+                
+                <!-- B2B Tribe Card -->
                 <div class="tribe-card fade-in">
                     <div class="tribe-name">B2B</div>
                     <div class="tribe-opco">GXI-B2B</div>
@@ -429,18 +449,19 @@
                             <div class="member-avatar lead" style="background-image:url('images/james.jpg');"></div>
                             <div class="member-info">
                                 <div class="member-name lead">Angelo</div>
-                                <div class="member-role">Team Lead</div>
+                                <div class="member-role">Lead (B2B)</div>
                             </div>
                         </div>
                         <div class="member">
                             <div class="member-avatar regular" style="background-image: url('images/james.jpg');"></div>
                             <div class="member-info">
                                 <div class="member-name">Bert</div>
-                                <div class="member-role">SRE</div>
+                                <div class="member-role">SRE (B2B)</div>
                             </div>
                         </div>
                     </div>
                 </div>
+
             </div>
         </div>
 
@@ -451,6 +472,8 @@
                 <span class="cluster-head">GXI-B2C • Lead: IPE</span>
             </div>
             <div class="tribes-grid">
+
+                <!-- B2C Tribe Card -->
                 <div class="tribe-card fade-in">
                     <div class="tribe-name">B2C</div>
                     <div class="tribe-opco">GXI-B2C</div>
@@ -459,28 +482,28 @@
                             <div class="member-avatar lead">E</div>
                             <div class="member-info">
                                 <div class="member-name lead">Earth</div>
-                                <div class="member-role">Team Lead</div>
+                                <div class="member-role">Lead (B2C)</div>
                             </div>
                         </div>
                         <div class="member">
                             <div class="member-avatar regular">M</div>
                             <div class="member-info">
                                 <div class="member-name">Mo</div>
-                                <div class="member-role">SRE</div>
+                                <div class="member-role">SRE (B2C)</div>
                             </div>
                         </div>
                         <div class="member">
                             <div class="member-avatar regular">D</div>
                             <div class="member-info">
                                 <div class="member-name">Danye</div>
-                                <div class="member-role">SRE</div>
+                                <div class="member-role">SRE (B2C)</div>
                             </div>
                         </div>
                         <div class="member">
                             <div class="member-avatar regular">J</div>
                             <div class="member-info">
                                 <div class="member-name">Jem K</div>
-                                <div class="member-role">SRE</div>
+                                <div class="member-role">SRE (B2C)</div>
                             </div>
                         </div>
                     </div>
