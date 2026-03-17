@@ -6,100 +6,6 @@
     <title>SRE Team Newsletter</title>
 
     <style>
-        /* ----- Leader Hover Interaction ----- */
-        .leader-card {
-            cursor: pointer;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .leader-card:hover {
-            transform: translateY(-8px) scale(1.03);
-            box-shadow: 0 20px 35px rgba(0, 255, 136, 0.15);
-        }
-
-        .leader-name {
-            transition: transform 0.3s ease, color 0.3s ease;
-        }
-
-        .leader-card:hover .leader-name {
-            transform: translateY(-3px);
-            color: #00ffbf;
-        }
-
-        /* ----- Leader Photo Improved ----- */
-        .leader-photo {
-            width: 85px;
-            height: 85px;
-            border-radius: 50%;
-            background: rgba(255,255,255,0.12);
-            border: 2px solid rgba(255,255,255,0.25);
-            margin: 0 auto 15px auto;
-            background-size: cover;
-            background-position: center;
-            transition: transform 0.3s ease;
-        }
-
-        .leader-card:hover .leader-photo {
-            transform: scale(1.07);
-        }
-
-        /* ----- Team Member Card Redesign ----- */
-        .team-members .member {
-            background: rgba(255, 255, 255, 0.03);
-            padding: 12px;
-            border-radius: 14px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            transition: transform 0.25s ease, background 0.25s ease;
-            border: 1px solid rgba(255,255,255,0.05);
-        }
-
-        .team-members .member:hover {
-            transform: translateX(6px);
-            background: rgba(255,255,255,0.08);
-        }
-
-        /* --- Member Photo Placeholder --- */
-        .member-avatar {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background-size: cover;
-            background-position: center;
-            flex-shrink: 0;
-            border: 2px solid rgba(255,255,255,0.2);
-        }
-
-        .member-avatar.lead {
-            background: linear-gradient(135deg, #00ff88, #00a2ff);
-            color: #000;
-            font-weight: bold;
-        }
-
-        .member-avatar.regular {
-            /* background: rgba(255,255,255,0.2);
-            color: #000; */
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background-size: cover;
-            background-position: center;
-            flex-shrink: 0;
-            border: 2px solid rgba(255,255,255,0.2);
-        
-        }
-
-        /* Text Improvements */
-        .member-info .member-name {
-            font-size: 0.95rem;
-        }
-
-        .member-info .member-role {
-            font-size: 0.75rem;
-            color: #bbb;
-        }
-
         * {
             margin: 0;
             padding: 0;
@@ -229,16 +135,18 @@
             margin-bottom: 30px;
             display: flex;
             align-items: center;
+            justify-content: center;
             gap: 15px;
         }
 
         .leadership-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 25px;
             margin-bottom: 60px;
         }
 
+        /* ----- Leader Hover Interaction ----- */
         .leader-card {
             background: rgba(255, 255, 255, 0.03);
             border: 1px solid rgba(255, 255, 255, 0.1);
@@ -246,22 +154,49 @@
             padding: 30px;
             cursor: pointer;
             text-align: center;
-            transition: all 0.3s ease;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
-        /* NEW: Photo placeholder */
+        .leader-card:hover {
+            transform: translateY(-8px) scale(1.03);
+            box-shadow: 0 20px 35px rgba(0, 255, 136, 0.15);
+        }
+
+        .leader-name {
+            font-weight: bold;
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+            transition: transform 0.3s ease, color 0.3s ease;
+        }
+
+        .leader-role {
+            font-size: 0.85rem;
+            color: #aaa;
+        }
+
+        .leader-card:hover .leader-name {
+            transform: translateY(-3px);
+            color: #00ffbf;
+        }
+
+        /* ----- Leader Photo Improved ----- */
         .leader-photo {
-            width: 80px;
-            height: 80px;
+            width: 85px;
+            height: 85px;
             border-radius: 50%;
+            background: rgba(255,255,255,0.12);
+            border: 2px solid rgba(255,255,255,0.25);
             margin: 0 auto 15px auto;
-            background: rgba(255,255,255,0.15);
-            border: 2px solid rgba(255,255,255,0.3);
             background-size: cover;
             background-position: center;
+            transition: transform 0.3s ease;
         }
 
-        /* Team Clusters */
+        .leader-card:hover .leader-photo {
+            transform: scale(1.07);
+        }
+
+        /* Team Clusters & Tribe Cards */
         .cluster-section {
             margin-bottom: 50px;
             opacity: 0;
@@ -274,10 +209,146 @@
             opacity: 1;
         }
 
+        .cluster-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .cluster-badge {
+            display: inline-block;
+            background: rgba(0, 162, 255, 0.1);
+            color: #00a2ff;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            margin-bottom: 10px;
+            border: 1px solid rgba(0, 162, 255, 0.3);
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .cluster-head {
+            display: block;
+            font-size: 1.2rem;
+            color: #fff;
+        }
+
         .tribes-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 20px;
+            justify-content: center;
+        }
+
+        .tribe-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 20px;
+            padding: 25px;
+            text-align: center; /* Center everything in the tribe card */
+        }
+
+        .tribe-name {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: #00ff88;
+            margin-bottom: 5px;
+        }
+
+        .tribe-opco {
+            font-size: 0.9rem;
+            color: #888;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* ----- Team Member Card Redesign (Centered & Bigger Photos) ----- */
+        .team-members {
+            display: flex;
+            flex-wrap: nowrap; /* Ensures they stay in one row */
+            justify-content: center; /* Ensures the row is centered */
+            gap: 15px;
+            overflow-x: auto; /* Enables scrolling on small screens to prevent squishing */
+            padding-bottom: 10px;
+        }
+
+        .team-members .member {
+            background: rgba(255, 255, 255, 0.03);
+            padding: 18px 15px;
+            border-radius: 14px;
+            display: flex;
+            flex-direction: column; /* Vertical alignment for a centered look */
+            align-items: center; /* Centers items horizontally */
+            text-align: center; /* Centers the text */
+            gap: 12px;
+            flex: 0 0 auto; /* Keeps cards a consistent size instead of stretching */
+            width: 140px; /* Fixed uniform width for a clean single row */
+            transition: transform 0.25s ease, background 0.25s ease, box-shadow 0.25s ease;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .team-members .member:hover {
+            transform: translateY(-5px); /* Move up slightly on hover */
+            background: rgba(255,255,255,0.08);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+
+        /* --- Member Photo Enlarged --- */
+        .member-avatar {
+            width: 65px; /* Increased from 40px */
+            height: 65px; /* Increased from 40px */
+            border-radius: 50%;
+            background-size: cover;
+            background-position: center;
+            flex-shrink: 0;
+            border: 2px solid rgba(255,255,255,0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem; /* Adjusted for initials to scale properly */
+        }
+
+        .member-avatar.lead {
+            background: linear-gradient(135deg, #00ff88, #00a2ff);
+            color: #000;
+            font-weight: bold;
+        }
+
+        .member-avatar.regular {
+            width: 65px; /* Match updated size */
+            height: 65px; /* Match updated size */
+            border-radius: 50%;
+            background-size: cover;
+            background-position: center;
+            flex-shrink: 0;
+            border: 2px solid rgba(255,255,255,0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+        }
+
+        /* Text Improvements */
+        .member-info {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .member-info .member-name {
+            font-size: 0.95rem;
+            font-weight: 600;
+        }
+
+        .member-info .member-role {
+            font-size: 0.75rem;
+            color: #bbb;
+        }
+
+        .member-name.lead {
+            color: #00ff88;
         }
 
     </style>
@@ -324,7 +395,7 @@
                 <div class="leader-photo" style="background-image:url('images/james.jpg');"></div>
                 <div class="leader-name">TBH</div>
                 <div class="leader-role">Head of Mynt SRE</div>
-            </div>
+            </div>  
 
             <div class="leader-card" data-cluster="cluster-4">
                 <div class="leader-photo" style="background-image:url('images/james.jpg');"></div>
@@ -342,206 +413,202 @@
     </section>
 
     <section class="clusters-container">
-        <h2 class="section-title">Our Teams</h2>
 
-<!-- Cluster 1 -->
-<div class="cluster-section cluster-1">
-    <div class="cluster-header">
-        <span class="cluster-badge">Cluster 1</span>
-        <span class="cluster-head">GXI-B2B & GXI-B2I • Lead: IPE</span>
-    </div>
-    <div class="tribes-grid">
-        <div class="tribe-card fade-in">
-            <div class="tribe-name">B2B</div>
-            <div class="tribe-opco">GXI-B2B</div>
-            <div class="team-members">
-                <div class="member">
-                    <div class="member-avatar lead" 
-        style="background-image:url('images/james.jpg');">
-    </div>
-
-                    <div class="member-info">
-                        <div class="member-name lead">Angelo</div>
-                        <div class="member-role">Team Lead</div>
-                    </div>
-                </div>
-                <div class="member">
-                    <div class="member-avatar regular" style="background-image: url('images/james.jpg');"></div>
-                    <div class="member-info">
-                        <div class="member-name">Bert</div>
-                        <div class="member-role">SRE</div>
-                    </div>
-                </div>
+        <!-- Cluster 1 -->
+        <div class="cluster-section cluster-1">
+            <div class="cluster-header">
+                <span class="cluster-badge">Cluster 1</span>
+                <span class="cluster-head">GXI-B2B & GXI-B2I • Lead: IPE</span>
             </div>
-        </div>
-    </div>
-</div>
-
-<!-- Cluster 2 -->
-<div class="cluster-section cluster-2">
-    <div class="cluster-header">
-        <span class="cluster-badge">Cluster 2</span>
-        <span class="cluster-head">GXI-B2C • Lead: IPE</span>
-    </div>
-    <div class="tribes-grid">
-        <div class="tribe-card fade-in">
-            <div class="tribe-name">B2C</div>
-            <div class="tribe-opco">GXI-B2C</div>
-            <div class="team-members">
-                <div class="member">
-                    <div class="member-avatar lead">E</div>
-                    <div class="member-info">
-                        <div class="member-name lead">Earth</div>
-                        <div class="member-role">Team Lead</div>
-                    </div>
-                </div>
-                <div class="member">
-                    <div class="member-avatar regular">M</div>
-                    <div class="member-info">
-                        <div class="member-name">Mo</div>
-                        <div class="member-role">SRE</div>
-                    </div>
-                </div>
-                <div class="member">
-                    <div class="member-avatar regular">D</div>
-                    <div class="member-info">
-                        <div class="member-name">Danye</div>
-                        <div class="member-role">SRE</div>
-                    </div>
-                </div>
-                <div class="member">
-                    <div class="member-avatar regular">J</div>
-                    <div class="member-info">
-                        <div class="member-name">Jem K</div>
-                        <div class="member-role">SRE</div>
+            <div class="tribes-grid">
+                <div class="tribe-card fade-in">
+                    <div class="tribe-name">B2B</div>
+                    <div class="tribe-opco">GXI-B2B</div>
+                    <div class="team-members">
+                        <div class="member">
+                            <div class="member-avatar lead" style="background-image:url('images/james.jpg');"></div>
+                            <div class="member-info">
+                                <div class="member-name lead">Angelo</div>
+                                <div class="member-role">Team Lead</div>
+                            </div>
+                        </div>
+                        <div class="member">
+                            <div class="member-avatar regular" style="background-image: url('images/james.jpg');"></div>
+                            <div class="member-info">
+                                <div class="member-name">Bert</div>
+                                <div class="member-role">SRE</div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
 
-    </div>
-</div>
+        <!-- Cluster 2 -->
+        <div class="cluster-section cluster-2">
+            <div class="cluster-header">
+                <span class="cluster-badge">Cluster 2</span>
+                <span class="cluster-head">GXI-B2C • Lead: IPE</span>
+            </div>
+            <div class="tribes-grid">
+                <div class="tribe-card fade-in">
+                    <div class="tribe-name">B2C</div>
+                    <div class="tribe-opco">GXI-B2C</div>
+                    <div class="team-members">
+                        <div class="member">
+                            <div class="member-avatar lead">E</div>
+                            <div class="member-info">
+                                <div class="member-name lead">Earth</div>
+                                <div class="member-role">Team Lead</div>
+                            </div>
+                        </div>
+                        <div class="member">
+                            <div class="member-avatar regular">M</div>
+                            <div class="member-info">
+                                <div class="member-name">Mo</div>
+                                <div class="member-role">SRE</div>
+                            </div>
+                        </div>
+                        <div class="member">
+                            <div class="member-avatar regular">D</div>
+                            <div class="member-info">
+                                <div class="member-name">Danye</div>
+                                <div class="member-role">SRE</div>
+                            </div>
+                        </div>
+                        <div class="member">
+                            <div class="member-avatar regular">J</div>
+                            <div class="member-info">
+                                <div class="member-name">Jem K</div>
+                                <div class="member-role">SRE</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-<!-- Cluster 3 -->
-<div class="cluster-section cluster-3">
-    <div class="cluster-header">
-        <span class="cluster-badge">Cluster 3</span>
-        <span class="cluster-head">Mynt • Lead: TBH</span>
-    </div>
-    <div class="tribes-grid">
-        <div class="tribe-card fade-in">
-            <div class="tribe-name">Technology</div>
-            <div class="tribe-opco">Mynt</div>
-            <div class="team-members">
-                <div class="member">
-                    <div class="member-avatar lead">V</div>
-                    <div class="member-info">
-                        <div class="member-name lead">Van L</div>
-                        <div class="member-role">Team Lead</div>
-                    </div>
-                </div>
-                <div class="member">
-                    <div class="member-avatar regular">V</div>
-                    <div class="member-info">
-                        <div class="member-name">Van I</div>
-                        <div class="member-role">SRE</div>
-                    </div>
-                </div>
-                <div class="member">
-                    <div class="member-avatar regular">D</div>
-                    <div class="member-info">
-                        <div class="member-name">Donald</div>
-                        <div class="member-role">SRE</div>
-                    </div>
-                </div>
             </div>
         </div>
 
-    </div>
-</div>
+        <!-- Cluster 3 -->
+        <div class="cluster-section cluster-3">
+            <div class="cluster-header">
+                <span class="cluster-badge">Cluster 3</span>
+                <span class="cluster-head">Mynt • Lead: TBH</span>
+            </div>
+            <div class="tribes-grid">
+                <div class="tribe-card fade-in">
+                    <div class="tribe-name">Technology</div>
+                    <div class="tribe-opco">Mynt</div>
+                    <div class="team-members">
+                        <div class="member">
+                            <div class="member-avatar lead">V</div>
+                            <div class="member-info">
+                                <div class="member-name lead">Van L</div>
+                                <div class="member-role">Team Lead</div>
+                            </div>
+                        </div>
+                        <div class="member">
+                            <div class="member-avatar regular">V</div>
+                            <div class="member-info">
+                                <div class="member-name">Van I</div>
+                                <div class="member-role">SRE</div>
+                            </div>
+                        </div>
+                        <div class="member">
+                            <div class="member-avatar regular">D</div>
+                            <div class="member-info">
+                                <div class="member-name">Donald</div>
+                                <div class="member-role">SRE</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-<!-- Cluster 4 -->
-<div class="cluster-section cluster-4">
-    <div class="cluster-header">
-        <span class="cluster-badge">Cluster 4</span>
-        <span class="cluster-head">Fuse, Sprynt, Ryse/BlockG • Lead: LEIH</span>
-    </div>
-    <div class="tribes-grid">
-
-        <div class="tribe-card fade-in">
-            <div class="tribe-name">Lending</div>
-            <div class="tribe-opco">Fuse</div>
-            <div class="team-members">
-                <div class="member">
-                    <div class="member-avatar lead">C</div>
-                    <div class="member-info">
-                        <div class="member-name lead">Cris</div>
-                        <div class="member-role">Team Lead</div>
-                    </div>
-                </div>
-                <div class="member">
-                    <div class="member-avatar regular">R</div>
-                    <div class="member-info">
-                        <div class="member-name">Ryan</div>
-                        <div class="member-role">SRE</div>
-                    </div>
-                </div>
-                <div class="member">
-                    <div class="member-avatar regular">J</div>
-                    <div class="member-info">
-                        <div class="member-name">James</div>
-                        <div class="member-role">SRE</div>
-                    </div>
-                </div>
-                <div class="member">
-                    <div class="member-avatar regular">E</div>
-                    <div class="member-info">
-                        <div class="member-name">Ericka</div>
-                        <div class="member-role">SRE</div>
-                    </div>
-                </div>
             </div>
         </div>
 
-    </div>
-</div>
+        <!-- Cluster 4 -->
+        <div class="cluster-section cluster-4">
+            <div class="cluster-header">
+                <span class="cluster-badge">Cluster 4</span>
+                <span class="cluster-head">Fuse, Sprynt, Ryse/BlockG • Lead: LEIH</span>
+            </div>
+            <div class="tribes-grid">
 
-<!-- Transformation -->
-<div class="cluster-section cluster-transformation">
-    <div class="cluster-header">
-        <span class="cluster-badge">Transformation</span>
-        <span class="cluster-head">Automation & Tooling • Lead: DOM</span>
-    </div>
-    <div class="tribes-grid">
-        <div class="tribe-card fade-in">
-            <div class="tribe-name">Automation & Tooling</div>
-            <div class="tribe-opco">SRE Transformation</div>
-            <div class="team-members">
-                <div class="member">
-                    <div class="member-avatar lead">I</div>
-                    <div class="member-info">
-                        <div class="member-name lead">Irone</div>
-                        <div class="member-role">Team Lead</div>
+                <div class="tribe-card fade-in">
+                    <div class="tribe-name">Lending</div>
+                    <div class="tribe-opco">Fuse</div>
+                    <div class="team-members">
+                        <div class="member">
+                            <div class="member-avatar lead">C</div>
+                            <div class="member-info">
+                                <div class="member-name lead">Cris</div>
+                                <div class="member-role">Team Lead</div>
+                            </div>
+                        </div>
+                        <div class="member">
+                            <div class="member-avatar regular">R</div>
+                            <div class="member-info">
+                                <div class="member-name">Ryan</div>
+                                <div class="member-role">SRE</div>
+                            </div>
+                        </div>
+                        <div class="member">
+                            <div class="member-avatar regular">J</div>
+                            <div class="member-info">
+                                <div class="member-name">James</div>
+                                <div class="member-role">SRE</div>
+                            </div>
+                        </div>
+                        <div class="member">
+                            <div class="member-avatar regular">E</div>
+                            <div class="member-info">
+                                <div class="member-name">Ericka</div>
+                                <div class="member-role">SRE</div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="member">
-                    <div class="member-avatar regular">B</div>
-                    <div class="member-info">
-                        <div class="member-name">Benjamin</div>
-                        <div class="member-role">SRE</div>
-                    </div>
-                </div>
-                <div class="member">
-                    <div class="member-avatar regular">E</div>
-                    <div class="member-info">
-                        <div class="member-name">Ericka</div>
-                        <div class="member-role">SRE</div>
+
+            </div>
+        </div>
+
+        <!-- Transformation -->
+        <div class="cluster-section cluster-transformation">
+            <div class="cluster-header">
+                <span class="cluster-badge">Transformation</span>
+                <span class="cluster-head">Automation & Tooling • Lead: DOM</span>
+            </div>
+            <div class="tribes-grid">
+                <div class="tribe-card fade-in">
+                    <div class="tribe-name">Automation & Tooling</div>
+                    <div class="tribe-opco">SRE Transformation</div>
+                    <div class="team-members">
+                        <div class="member">
+                            <div class="member-avatar lead">I</div>
+                            <div class="member-info">
+                                <div class="member-name lead">Irone</div>
+                                <div class="member-role">Team Lead</div>
+                            </div>
+                        </div>
+                        <div class="member">
+                            <div class="member-avatar regular">B</div>
+                            <div class="member-info">
+                                <div class="member-name">Benjamin</div>
+                                <div class="member-role">SRE</div>
+                            </div>
+                        </div>
+                        <div class="member">
+                            <div class="member-avatar regular">E</div>
+                            <div class="member-info">
+                                <div class="member-name">Ericka</div>
+                                <div class="member-role">SRE</div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-</div>  
+        </div>  
 
     </section>
 
@@ -570,7 +637,7 @@
     }
     animateCount();
 
-    // NEW: Leader click / cluster toggle
+    // Leader click / cluster toggle
     const leaders = document.querySelectorAll(".leader-card");
     const clusters = document.querySelectorAll(".cluster-section");
 
